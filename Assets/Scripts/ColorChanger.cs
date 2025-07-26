@@ -11,12 +11,9 @@ public class ColorChanger : MonoBehaviour
         SetRandomColor();
     }
 
-    private void CacheComponents()
-    {
-        _renderer = GetComponent<Renderer>();
-        if (_renderer == null)
-            Debug.LogError("Renderer component is missing!", this);
-    }
+    private void CacheComponents() =>
+       _renderer = GetComponent<Renderer>();
+
 
     public void SetRandomColor()
     {

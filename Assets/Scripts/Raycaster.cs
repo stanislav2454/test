@@ -19,12 +19,13 @@ public class Raycaster : MonoBehaviour
 
     private void PerformRaycast()
     {
-        if (_mainCamera == null || _destructionHandler == null) return;
+        if (_mainCamera == null || _destructionHandler == null)
+            return;
 
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance))        
+        if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance))
             if (hit.transform.TryGetComponent(out Cube cube))
-                _destructionHandler.HandleDestruction(cube);        
+                _destructionHandler.HandleDestruction(cube);
     }
 }

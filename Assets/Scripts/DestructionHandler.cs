@@ -12,7 +12,8 @@ public class DestructionHandler : MonoBehaviour
 
     public void HandleDestruction(Cube hitCube)
     {
-        if (hitCube == null) return;
+        if (hitCube == null) 
+            return;
 
         if (ShouldSplit(hitCube))
             SplitCube(hitCube);
@@ -33,7 +34,8 @@ public class DestructionHandler : MonoBehaviour
 
     private void ExplodeNearbyObjects(Vector3 position)
     {
-        if (_exploder == null) return;
+        if (_exploder == null) 
+            return;
 
         Collider[] colliders = Physics.OverlapSphere(position, Mathf.Max(_explosionRadius, _minExplosionRadius));
 

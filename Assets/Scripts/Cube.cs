@@ -25,10 +25,7 @@ public class Cube : MonoBehaviour
     public void Initialize(float splitChance)
     {
         SplitChance = Mathf.Clamp01(splitChance);
-        float newScale = Mathf.Max(_initialScale.x * splitChance, 0.1f);
         transform.localScale = _initialScale * splitChance;
-
-        if (_colorChanger != null)        
-            _colorChanger.SetRandomColor();        
+        _colorChanger?.SetRandomColor();
     }
 }

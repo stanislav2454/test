@@ -10,11 +10,13 @@ public class Exploder : MonoBehaviour
 
     public void Explode(List<Rigidbody> rigidbodies, Vector3 center)
     {
-        if (rigidbodies == null || rigidbodies.Count == 0) return;
+        if (rigidbodies == null || rigidbodies.Count == 0) 
+            return;
 
         foreach (var rigidbody in rigidbodies)
         {
-            if (rigidbody == null) continue;
+            if (rigidbody == null) 
+                continue;
 
             ApplyExplosionForce(rigidbody, center);
         }
@@ -22,24 +24,15 @@ public class Exploder : MonoBehaviour
 
     private void ApplyExplosionForce(Rigidbody rigidbody, Vector3 center)
     {
-        try
-        {
-            float scale = Mathf.Max(rigidbody.transform.localScale.x, _minScale);
-            float distance = Mathf.Max(Vector3.Distance(center, rigidbody.position), _minForceDistance);
-            float force = _maxExplosionForce / (scale * distance);
+        float scale = Mathf.Max(rigidbody.transform.localScale.x, _minScale);
+        float distance = Mathf.Max(Vector3.Distance(center, rigidbody.position), _minForceDistance);
+        float force = _maxExplosionForce / (scale * distance);
 
-            if (float.IsNaN(force) || float.IsInfinity(force))
-            {
-                Debug.LogWarning($"Invalid force calculation: scale={scale}, distance={distance}");
-                force = _maxExplosionForce;
-            }
+        if (float.IsNaN(force) || float.IsInfinity(force))
+            force = _maxExplosionForce;
 
-            float effectiveRadius = Mathf.Max(_explosionRadius / scale, 0.1f);
-            rigidbody.AddExplosionForce(force, center, effectiveRadius);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Explosion force error: {e.Message}");
-        }
+        float effectiveRadius = Mathf.Max(_explosionRadius / scale, 0.1f);
+        rigidbody.AddExplosionForce(force, center, effectiveRadius);
+
     }
 }
